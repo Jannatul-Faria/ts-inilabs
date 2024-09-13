@@ -31,7 +31,7 @@
                     </button>
                 </div>
 
-                <div class="d-flex">
+                {{-- <div class="d-flex">
                     <div class="dropdown d-inline-block">
                         <button type="button" class="btn header-item noti-icon waves-effect"
                             id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
@@ -127,40 +127,56 @@
                             </div>
                         </div>
                     </div>
-                    <div class="dropdown d-inline-block">
-                        <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="rounded-circle header-profile-user"
-                                src="" alt="Avatar">
-                            <span class="d-none d-xl-inline-block ms-1" key="t-henry"></span>
-                            <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end">
-                            <!-- item-->
-                            <a class="dropdown-item" href="#"><i
-                                    class="bx bx-user font-size-16 align-middle me-1"></i> <span
-                                    key="t-profile">Profile</span></a>
-                            <div class="dropdown-divider"></div>
-                            <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                class="dropdown-item text-danger" href=""><i
-                                    class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span
-                                    key="t-logout">Logout</span></a>
-                            {{-- logout form --}}
-                            <form id="logout-form" action="" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </div>
+                   
+                </div> --}}
+                <div class="d-flex">
+                <div class="dropdown d-inline-block">
+                    <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <h5  header-profile-user>{{ Auth::user()->name }} </h5>
+                        <span class="d-none d-xl-inline-block ms-1" key="t-henry"></span>
+                        <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end">
+                        <!-- item-->
+                        <x-dropdown-link :href="route('profile.edit')">
+                            {{ __('Profile') }}
+                        </x-dropdown-link>
+
+                        <!-- Authentication -->
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+
+                            <x-dropdown-link :href="route('logout')"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </x-dropdown-link>
+                        </form>
+                        {{-- <a class="dropdown-item" href="#"><i
+                                class="bx bx-user font-size-16 align-middle me-1"></i> <span
+                                key="t-profile">Profile</span></a>
+                        <div class="dropdown-divider"></div>
+                        <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                            class="dropdown-item text-danger" href=""><i
+                                class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span
+                                key="t-logout">Logout</span></a>
+                        logout form
+                        <form id="logout-form" action="" method="POST" class="d-none">
+                            @csrf
+                        </form> --}}
                     </div>
+                </div>
                 </div>
             </div>
         </header>
 
         <!-- ========== Left Sidebar Start ========== -->
-        <div class="vertical-menu">
+        {{-- <div class="vertical-menu">
             <div data-simplebar class="h-100">
                 @include('to-do.Layouts.sidebar')
             </div>
-        </div>
+        </div> --}}
         <!-- Left Sidebar End -->
         <!-- ============================================================== -->
         <!-- Start right Content here -->

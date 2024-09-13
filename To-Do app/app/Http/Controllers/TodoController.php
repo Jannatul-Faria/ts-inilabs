@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Todo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TodoController extends Controller
 {
@@ -12,9 +13,8 @@ class TodoController extends Controller
      */
     public function index()
     {
-        $todos = Todo::all();
+        $todos =Todo::where('user_id', Auth::user()->id)->get();
         return view('to-do.Pages.home', compact('todos'));
-       
     }
 
     /**
@@ -30,13 +30,21 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title'=>['required','string'],
+        ]);
+        Todo::create([
+            'title'=>$request->title,
+            'user_id'=>Auth::id(),
+            'completed'=>false,
+        ]);
+        return redirect()->route('todos.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Todo $todo)
     {
         //
     }
@@ -44,24 +52,32 @@ class TodoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Todo $todo)
     {
-        //
+        return view('to-do.Pages.edit', compact('todo'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Todo $todo)
     {
-        //
+        $request->validate([
+            'title'=>['required','string']
+        ]);
+       $todo->update([
+            'title'=>$request->title,
+            'completed'=>$request->has('completed')   
+       ]);
+        return redirect()->route('todos.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Todo $todo)
     {
-        //
+        $todo->delete();
+        return redirect()->route('todos.index');
     }
 }
