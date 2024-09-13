@@ -1,66 +1,178 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# To-Do App
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This is a simple To-Do application built with Laravel. Users can create, update, view, and delete their to-do tasks. Each to-do is linked to an authenticated user. The app features user authentication using Laravel Breeze and a custom dashboard for the front-end. It demonstrates basic CRUD (Create, Read, Update, Delete) operations, user authentication, and database relationships.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- User Authentication (login, register) powered by Laravel Breeze
+- Custom dashboard for displaying tasks
+- Create To-Do items
+- View all To-Dos by the authenticated user
+- Update and mark To-Dos as completed or not completed
+- Delete To-Do items
+- Protect routes from unauthorized access
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Requirements
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP >= 8.0
+- Composer
+- Laravel >= 9.x
+- MySQL or any other supported database
+- Node.js and npm (for compiling assets)
 
-## Learning Laravel
+## Installation
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. **Clone the repository**
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+   ```bash
+   git clone https://github.com/Jannatul-Faria/ts-inilabs.git
+   cd "To-Do app"
+   ```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+2. **Install dependencies**
 
-## Laravel Sponsors
+   Install PHP dependencies using Composer:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+   ```bash
+   composer install
+   ```
 
-### Premium Partners
+   Install front-end dependencies using npm:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+   ```bash
+   npm install
+   ```
+
+3. **Configure environment**
+
+   Copy the `.env.example` file to `.env`:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+   Set up the `.env` file with your database configuration. Example:
+
+   ```env
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=to-do
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
+
+4. **Generate application key**
+
+   ```bash
+   php artisan key:generate
+   ```
+
+5. **Run migrations**
+
+   Create the necessary tables in the database by running the migrations:
+
+   ```bash
+   php artisan migrate
+   ```
+
+6. **Seed the database (optional)**
+
+   If you have any seeders, you can run them as follows:
+
+   ```bash
+   php artisan db:seed
+   ```
+
+7. **Install Laravel Breeze**
+
+   If you haven't already installed Laravel Breeze (for authentication), run the following:
+
+   ```bash
+   composer require laravel/breeze --dev
+   php artisan breeze:install
+   ```
+
+   Then, compile the assets and migrate:
+
+   ```bash
+   npm install && npm run dev
+   php artisan migrate
+   ```
+
+8. **Run the application**
+
+   You can run the application using Laravel's development server:
+
+   ```bash
+   php artisan serve
+   ```
+
+   Access the application at [http://localhost:8000](http://localhost:8000).
+
+## Custom Dashboard
+
+The application features a custom dashboard for managing to-do tasks. Once logged in, users can view, create, update, and delete their tasks from the dashboard.
+
+### Dashboard Layout
+
+- **Home Page**: Displays a list of all to-do tasks.
+- **Create To-Do**: A form to create a new task.
+- **Edit To-Do**: Allows users to update the title and completion status of a task.
+
+## Usage
+
+### 1. Register / Login
+To use the application, register a new account or log in using Laravel Breeze's authentication system.
+
+### 2. Creating a To-Do
+Once logged in, navigate to the 'Create To-Do' page via the custom dashboard and enter a title to add a new task.
+
+### 3. Viewing To-Dos
+You can view all of your to-dos on the home page of the dashboard.
+
+### 4. Updating To-Dos
+Click on a to-do item to edit its title or mark it as completed.
+
+### 5. Deleting To-Dos
+Click the delete button next to any to-do to remove it from the list.
+
+## Code Overview
+
+### Models
+- `User`: The user model, representing the users of the app.
+- `Todo`: The model for to-do items. Each to-do belongs to a user.
+
+### Controllers
+- `TodoController`: Handles CRUD operations for the to-do items.
+
+### Views
+- Custom Blade templates for the dashboard, user registration, login, and managing to-dos.
+- The custom dashboard is built using Blade components.
+
+### Routes
+All application routes are defined in the `routes/web.php` file.
+
+- **Home**: `/` - Displays the user's to-do list on the dashboard.
+- **Create To-Do**: `/todos/create` - Form to create a new to-do.
+- **Edit To-Do**: `/todos/{todo}/edit` - Form to edit a specific to-do.
+- **Delete To-Do**: `/todos/{todo}` - Delete a specific to-do (handled via form submission with DELETE method).
+
+### Middleware
+- `auth`: Ensures that only authenticated users can access certain routes.
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+If you'd like to contribute to this project, feel free to submit a pull request or open an issue.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is open-source and available under the [MIT License](LICENSE).
+```
+
+### Key Changes:
+- **Breeze Authentication**: A section was added for Laravel Breeze installation.
+- **Custom Dashboard**: Added details about the custom dashboard in the features and usage sections.
+- **Database Information**: Used your provided database information in the `.env` setup.
+  
+You can adjust the repository URL and other minor details to match your exact setup.

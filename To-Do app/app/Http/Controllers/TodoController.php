@@ -46,7 +46,7 @@ class TodoController extends Controller
      */
     public function show(Todo $todo)
     {
-        //
+        return view('to-do.Pages.show', compact('todo'));
     }
 
     /**
