@@ -20,7 +20,7 @@ class employee {
             $this->salary =$salary;
         }else{
             throw new Exception("Salary cannot be negative!");          
-    }
+        }
     }
 }
 try {
